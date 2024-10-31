@@ -28,7 +28,7 @@
  * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  | End  |                    | Home |   N  |   M  |   ,  |   .  |   /  | Shift|
  * |-------------+------+------+------+------+------+------+------+------+------+------+------+------+------+-------------|
- * | Ctrl | STU  | PGDN | Win  |||||||| Alt  | Space| Lower|||||||| Raise| Enter| RAlt ||||||||      | PGUP | Ins  | RCtrl|
+ * | Ctrl |      | PGDN | Win  |||||||| Alt  | Space| Lower|||||||| Raise| Enter| RAlt ||||||||      | PGUP | Ins  | RCtrl|
  * .----------------------------------------------------------------------------------------------------------------------.
  */
                         bindings = <
@@ -36,7 +36,7 @@
 &kp  ESC      &kp  Q         &kp  W        &kp  E        &kp  R        &kp  T        &kp  MINUS             &kp  EQUAL    &kp  Y        &kp  U        &kp  I        &kp  O        &kp  P        &kp  BSLH
 &kp  TAB      &kp  A         &kp  S        &kp  D        &kp  F        &kp  G        &kp  DEL               &kp  BSPC     &kp  H        &kp  J        &kp  K        &kp  L        &kp  SEMI     &kp  SQT
 &kp  LSHFT    &kp  Z         &kp  X        &kp  C        &kp  V        &kp  B        &kp  END               &kp  HOME     &kp  N        &kp  M        &kp  COMMA    &kp  DOT      &kp  SLASH    &kp  RSHFT
-&kp  LCTRL    &studio_unlock &kp  PG_DN    &kp  LMETA    &kp  LALT     &kp  SPACE    &mo  LOWER             &mo  RAISE    &kp  RET      &kp  RALT     &none         &kp  PG_UP    &kp  INS      &kp  RCTRL
+&kp  LCTRL    &none          &kp  PG_DN    &kp  LMETA    &kp  LALT     &kp  SPACE    &mo  LOWER             &mo  RAISE    &kp  RET      &kp  RALT     &none         &kp  PG_UP    &kp  INS      &kp  RCTRL
                         >;
                 };
                 lower_layer {
