@@ -59,7 +59,7 @@ RC(4,0) RC(4,1) RC(4,2) RC(4,3) RC(4,4)         RC(4,5) RC(4,6) RC(4,13) RC(4,12
     };
 };
 
-&pro_micro 1 {
+/*&pro_micro 1 {
     status = "okay";
 
     oled: ssd1306@3c {
@@ -77,4 +77,4 @@ RC(4,0) RC(4,1) RC(4,2) RC(4,3) RC(4,4)         RC(4,5) RC(4,6) RC(4,13) RC(4,12
         inversion-on;
         prechargep = <0x22>;
     };
-};
+};*/
