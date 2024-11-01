@@ -52,7 +52,7 @@
 };
 
 &pwm0 {
-    compatible = "nordic,nrf-spim";
+    compatible = "nordic";
     status = "okay";
 
     pinctrl-0 = <&pwm0_default>;
