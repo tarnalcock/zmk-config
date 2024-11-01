@@ -13,6 +13,13 @@
             low-power-enable;
         };
     };
+
+    // Updated pin control for backlight (port 1, pin 11)
+    backlight_default: backlight_default {
+        group1 {
+            psels = <NRF_PSEL(GPIO, 1, 11)>;
+        };
+    };
 };
 
 &spi3 {
@@ -27,11 +34,11 @@
         compatible = "worldsemi,ws2812-spi";
 
         /* SPI */
-        reg = <0>; /* ignored, but necessary for SPI bindings */
+        reg = <0>;
         spi-max-frequency = <4000000>;
 
         /* WS2812 */
-        chain-length = <10>; /* arbitrary; change at will */
+        chain-length = <10>;
         spi-one-frame = <0x70>;
         spi-zero-frame = <0x40>;
 
@@ -39,8 +46,25 @@
     };
 };
 
+// Backlight LED node with updated GPIO pin
+backlight: backlight@1 {
+    compatible = "gpio-leds";
+    pinctrl-0 = <&backlight_default>;
+    pinctrl-names = "default";
+
+    leds {
+        led0 {
+            gpios = <&gpio1 11 GPIO_ACTIVE_HIGH>; /* Port 1, Pin 11 */
+            label = "backlight";
+            default-state = "off";
+            max-brightness = <255>; /* Optional: max brightness level */
+        };
+    };
+};
+
 / {
     chosen {
         zmk,underglow = &led_strip;
+        zmk,backlight = &backlight;
     };
 };
