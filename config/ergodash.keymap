@@ -162,9 +162,21 @@
     };
 };
 
+
+ls0xx: ls0xx@1 {
+    compatible = "sharp,ls0xx";
+    label = "DISPLAY";
+    spi-max-frequency = <2000000>;
+    reg = <1>;
+    width = <144>;
+    height = <168>;
+    // disp-en-gpios = <&gpio0 23 GPIO_ACTIVE_HIGH>;
+};
+
 / {
     chosen {
         zmk,underglow = &led_strip;
         zmk,backlight = &backlight;
+        zephyr,display = &ls0xx;
     };
 };
