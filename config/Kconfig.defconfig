@@ -13,6 +13,16 @@ endif
 
 if SHIELD_ERGODASH_LEFT || SHIELD_ERGODASH_RIGHT
 
+if ZMK_BACKLIGHT
+
+config PWM
+    default y
+
+config LED_PWM
+    default y
+
+endif # ZMK_BACKLIGHT
+
 config ZMK_SPLIT
     default y
 
