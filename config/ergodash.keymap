@@ -22,7 +22,7 @@
         soft_off {
             bindings = <&soft_off>;
             key-positions = <0 13>;
-            layers = <0>;
+            layers = <0>;       
         };
     };
 
@@ -124,28 +124,6 @@
     };
 };
 
-&i2c1 {
-    compatible = "nordic,nrf-twim";
-    status = "okay";
-    sda-pin = <6>;  // SDA pin
-    scl-pin = <7>;  // SCL pin
-    clock-frequency = <I2C_BITRATE_FAST>;
-
-    ssd1306: ssd1306@3c {
-        compatible = "solomon,ssd1306fb";
-        reg = <0x3C>;
-        label = "SSD1306";
-        width = <128>;
-        height = <32>;
-        segment-offset = <0>;
-        page-offset = <0>;
-    };
-};
-
-&display {
-    label = "SSD1306";
-};
-
 &spi3 {
     compatible = "nordic,nrf-spim";
     status = "okay";
@@ -189,6 +167,5 @@
     chosen {
         zmk,underglow = &led_strip;
         zmk,backlight = &backlight;
-        zephyr,display = &display;
     };
 };
