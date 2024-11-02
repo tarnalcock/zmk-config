@@ -203,6 +203,6 @@ arduino_i2c: &i2c1 {
     chosen {
         zmk,underglow = &led_strip;
         zmk,backlight = &backlight;
-        zephyr, display = &arduino_i2c;
+        zephyr,display = &arduino_i2c;
     };
 };
