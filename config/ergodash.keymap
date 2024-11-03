@@ -179,7 +179,7 @@
 &i2c1 {
     compatible = "nordic,nrf-twi";
     status = "okay";
-    clock-frequency = <25000>;  // Set the desired I2C speed here
+    clock-frequency = <100000>;  // Set the desired I2C speed here
     pinctrl-0 = <&i2c1_default>;
     pinctrl-1 = <&i2c1_sleep>;
     pinctrl-names = "default", "sleep";
@@ -187,7 +187,6 @@
 
 / {
     chosen {
-        zephyr,display = &oled;
         zmk,underglow = &led_strip;
         zmk,backlight = &backlight;
     };
