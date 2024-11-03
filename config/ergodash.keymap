@@ -102,11 +102,10 @@
 &i2c1 {
     compatible = "nordic,nrf-twi";
     status = "okay";
-    sda-pin = <NRF_PSEL(TWIM_SDA, 0, 17)>;
-    scl-pin = <NRF_PSEL(TWIM_SCL, 0, 20)>;
     clock-frequency = <100000>; // Typically 100000 (for 100 kHz)
     pinctrl-0 = <&i2c1_default>;
     pinctrl-1 = <&i2c1_sleep>;
+    pinctrl-names = "default", "sleep";
 };
 
 &pinctrl {
