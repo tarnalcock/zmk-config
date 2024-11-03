@@ -102,8 +102,8 @@
 &i2c1 {
     compatible = "nordic,nrf-twi";
     status = "okay";
-    sda-pin = 17;
-    scl-pin = 20;
+    sda-pin = <NRF_PSEL(SPIM_MOSI, 0, 17);
+    scl-pin = <NRF_PSEL(SPIM_MOSI, 0, 20);
     clock-frequency = <I2C_SPEED_STANDARD>; // Typically 100000 (for 100 kHz)
 };
 
