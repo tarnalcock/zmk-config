@@ -99,15 +99,6 @@
     };
 };
 
-&i2c0 {
-    compatible = "nordic,nrf-twi";
-    status = "okay";
-    clock-frequency = <100000>; // Typically 100000 (for 100 kHz)
-    pinctrl-0 = <&i2c0_default>;
-    pinctrl-1 = <&i2c0_sleep>;
-    pinctrl-names = "default", "sleep";
-};
-
 &pinctrl {
     i2c0_default: i2c0_default {
         group1 {
@@ -185,16 +176,31 @@
 };
 
 &i2c0 {
-    ssd1306: ssd1306@3c {
+    compatible = "nordic,nrf-twi";
+    status = "okay";
+    clock-frequency = <100000>; // Typically 100000 (for 100 kHz)
+    pinctrl-0 = <&i2c0_default>;
+    pinctrl-1 = <&i2c0_sleep>;
+    pinctrl-names = "default", "sleep";
+};
+
+&pro_micro_i2c {
+    status = "okay";
+
+    oled: ssd1306@3c {
         compatible = "solomon,ssd1306fb";
-        reg = <0x3C>;  // Address for the SSD1306, often 0x3C or 0x3D
+        reg = <0x3c>;
         width = <128>;
         height = <32>;
-        display-offset = <0>;
-        multiplex-ratio = <31>;
-        prechargep = <0x22>;
         segment-offset = <0>;
         page-offset = <0>;
+        display-offset = <0>;
+        multiplex-ratio = <31>;
+        segment-remap;
+        com-invdir;
+        com-sequential;
+        inversion-on;
+        prechargep = <0x22>;
     };
 };
 
@@ -202,6 +208,6 @@
     chosen {
         zmk,underglow = &led_strip;
         zmk,backlight = &backlight;
-        zephyr,display = &ssd1306;
+        zephyr,display = &oled;
     };
 };
