@@ -179,7 +179,6 @@
         height = <32>;
         segment-offset = <0>;
         page-offset = <0>;
-        reset-gpios = <&gpio0 PIN_NUMBER_FOR_RESET GPIO_ACTIVE_LOW>; // Optional, if your display has a reset pin
     };
 };
 
