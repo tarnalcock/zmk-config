@@ -190,6 +190,9 @@
         reg = <0x3C>;  // Address for the SSD1306, often 0x3C or 0x3D
         width = <128>;
         height = <32>;
+        display-offset = <0>;
+        multiplex-ratio = <31>;
+        prechargep = <0x22>;
         segment-offset = <0>;
         page-offset = <0>;
     };
