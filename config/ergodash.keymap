@@ -206,8 +206,8 @@
 
 / {
     chosen {
+        zephyr,display = &oled;
         zmk,underglow = &led_strip;
         zmk,backlight = &backlight;
-        zephyr,display = &oled;
     };
 };
