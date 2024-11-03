@@ -104,7 +104,7 @@
     status = "okay";
     sda-pin = <NRF_PSEL(TWIM_SDA, 0, 17)>;
     scl-pin = <NRF_PSEL(TWIM_SCL, 0, 20)>;
-    clock-frequency = <I2C_SPEED_STANDARD>; // Typically 100000 (for 100 kHz)
+    clock-frequency = 100000; // Typically 100000 (for 100 kHz)
 };
 
 &pinctrl {
