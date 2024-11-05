@@ -121,23 +121,6 @@
             low-power-enable;
         };
     };
-
-    spi1_default: spi1_default {
-        group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 2)>;
-            psels = <NRF_PSEL(SPIM_SCK, 0, 3)>;
-            psels = <NRF_PSEL(SPIM_CS, 0, 4)>;
-            psels = <NRF_PSEL(SPIM_DC, 0, 5)>;
-            psels = <NRF_PSEL(SPIM_RESET, 0, 15)>;
-        };
-    };
-
-    spi1_sleep: spi1_sleep {
-        group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 2)>;
-            low-power-enable;
-        };
-    };
 };
 
 &spi3 {
