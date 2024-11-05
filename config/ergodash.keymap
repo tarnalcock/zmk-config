@@ -121,6 +121,15 @@
             low-power-enable;
         };
     };
+    spi1_default: spi1_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 0, 20)>,
+                    <NRF_PSEL(SPIM_MOSI, 1, 1)>,
+                    <NRF_PSEL(SPIM_CS, 1, 2)>,
+                    <NRF_PSEL(SPIM_DC, 1, 7)>,
+                    <NRF_PSEL(SPIM_RESET, 0, 17)>;
+        };
+    };
 };
 
 &spi3 {
@@ -164,9 +173,7 @@
 
 &spi1 {
     status = "okay";
-    sck-pin = <NRF_PSEL(SPIM_SCK, 0, 20)>;
-    mosi-pin = <NRF_PSEL(SPIM_MOSI, 1, 1)>;
-    cs-gpios = <&gpio1 2 GPIO_ACTIVE_LOW>;
+    cs-gpios = <&gpio1 2 GPIO_ACTIVE_LOW>;       // CS on P1.02
 
     ssd16xx: ssd16xxfb@0 {
         compatible = "solomon,ssd16xxfb";
@@ -179,8 +186,7 @@
         pp-height-bits = <16>;
 
         dc-gpios = <&gpio1 7 GPIO_ACTIVE_LOW>;
-        reset-gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
-        
+        reset-gpios = <&gpio0 17 GPIO_ACTIVE_LOW>; 
         gdv = [03];
         sdv = [40 a8 32];
         vcom = <0x55>;
@@ -213,8 +219,11 @@
             00 00 00 00 00
             00 00 00 00 00
             00 00 00 00 00
+            00 00 00 00 00
         ];
     };
+
+    pinctrl-0 = <&spi1_default>;
 };
 
 / {
