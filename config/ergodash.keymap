@@ -124,11 +124,11 @@
 
     spi1_default: spi1_default {
         group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 2)>;  // MOSI for SSD1680
-            psels = <NRF_PSEL(SPIM_SCK, 0, 3)>;   // SCK for SSD1680
-            psels = <NRF_PSEL(SPIM_CS, 0, 4)>;    // Chip Select (CS) for SSD1680
-            psels = <NRF_PSEL(SPIM_DC, 0, 5)>;    // Data/Command (DC) for SSD1680
-            psels = <NRF_PSEL(SPIM_RESET, 0, 15)>; // Reset (RST) for SSD1680
+            psels = <NRF_PSEL(SPIM_MOSI, 0, 2)>;
+            psels = <NRF_PSEL(SPIM_SCK, 0, 3)>;
+            psels = <NRF_PSEL(SPIM_CS, 0, 4)>;
+            psels = <NRF_PSEL(SPIM_DC, 0, 5)>;
+            psels = <NRF_PSEL(SPIM_RESET, 0, 15)>;
         };
     };
 
@@ -181,27 +181,23 @@
 
 &spi1 {
     status = "okay";
-    sck-pin = <NRF_PSEL(SPIM_SCK, 0, 3)>;        // SCK on P0.03
-    mosi-pin = <NRF_PSEL(SPIM_MOSI, 0, 2)>;      // MOSI on P0.02
-    cs-gpios = <&gpio0 4 GPIO_ACTIVE_LOW>;        // CS on P0.04
+    sck-pin = <NRF_PSEL(SPIM_SCK, 0, 20)>;
+    mosi-pin = <NRF_PSEL(SPIM_MOSI, 1, 1)>;
+    cs-gpios = <&gpio1 2 GPIO_ACTIVE_LOW>;
 
     ssd16xx: ssd16xxfb@0 {
         compatible = "solomon,ssd16xxfb";
         label = "SSD16XX";
-        spi-max-frequency = <4000000>;           // 4 MHz max frequency
+        spi-max-frequency = <4000000>;
         reg = <0>;
         width = <250>;
         height = <122>;
         pp-width-bits = <8>;
         pp-height-bits = <16>;
 
-        dc-gpios = <&gpio0 5 GPIO_ACTIVE_LOW>;    // D/C on P0.05
-        reset-gpios = <&gpio0 15 GPIO_ACTIVE_LOW>; // RES on P0.15
-        // BUSY line not connected, can be omitted if optional
-
-        supply-gpios = <&gpio0 5 GPIO_ACTIVE_HIGH>;
-
-        // Display-specific properties
+        dc-gpios = <&gpio1 7 GPIO_ACTIVE_LOW>;
+        reset-gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
+        
         gdv = [03];
         sdv = [40 a8 32];
         vcom = <0x55>;
@@ -228,7 +224,6 @@
             80 00 00 00 00 00 00
             00 00 00 00 00 00 00
             0A 00 00 00 04
-            00 00 00 00 00
             00 00 00 00 00
             00 00 00 00 00
             00 00 00 00 00
