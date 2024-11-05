@@ -135,6 +135,19 @@
             low-power-enable;
         };
     };
+
+    spi1_default: spi1_default {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>, <NRF_PSEL(TWIM_SCL, 0, 20)>;;
+        };
+    };
+
+    spi1_sleep: spi1_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_MOSI, 0, 6)>;
+            low-power-enable;
+        };
+    };
 };
 
 &spi3 {
@@ -176,39 +189,69 @@
     };
 };
 
-&pro_micro_i2c {
-    compatible = "nordic,nrf-twi";
+&spi1 {
     status = "okay";
-    clock-frequency = <100000>;  // Set the desired I2C speed here
-    pinctrl-0 = <&i2c1_default>;
-    pinctrl-1 = <&i2c1_sleep>;
-    pinctrl-names = "default", "sleep";
-};
+    sck-pin = <NRF_PSEL(SPI_SCK, 0, 20)>;        // SCL (clock) on P0.20
+    mosi-pin = <NRF_PSEL(SPI_MOSI, 1, 1)>;       // SDA (data/MOSI) on P1.01
+    cs-gpios = <&gpio1 2 GPIO_ACTIVE_LOW>;       // CS on P1.02
 
-&pro_micro_i2c {
-    status = "okay";
+    ssd16xx: ssd16xxfb@0 {
+        compatible = "solomon,ssd16xxfb";
+        label = "SSD16XX";
+        spi-max-frequency = <4000000>;           // 4 MHz max frequency
+        reg = <0>;
+        width = <250>;
+        height = <122>;
+        pp-width-bits = <8>;
+        pp-height-bits = <16>;
 
-    oled: ssd1306@3c {
-        compatible = "solomon,ssd1306fb";
-        reg = <0x3c>;
-        width = <128>;
-        height = <32>;
-        segment-offset = <0>;
-        page-offset = <0>;
-        display-offset = <0>;
-        multiplex-ratio = <31>;
-        segment-remap;
-        com-invdir;
-        com-sequential;
-        inversion-on;
-        prechargep = <0x22>;
-        ready-time-ms = <20>;
+        dc-gpios = <&gpio1 7 GPIO_ACTIVE_LOW>;   // D/C on P1.07
+        reset-gpios = <&gpio0 17 GPIO_ACTIVE_LOW>; // RES on P0.17
+        // BUSY line not connected, can be omitted if optional
+
+        supply-gpios = <&gpio0 5 GPIO_ACTIVE_HIGH>;
+
+        // Display-specific properties
+        gdv = [03];
+        sdv = [40 a8 32];
+        vcom = <0x55>;
+        border-waveform = <0x03>;
+        softstart = [D7 D6 9D];
+        lut-initial = [
+            80 60 40 00 00 00 00
+            10 60 20 00 00 00 00
+            80 60 40 00 00 00 00
+            10 60 20 00 00 00 00
+            00 00 00 00 00 00 00
+            03 03 00 00 02
+            09 09 00 00 02
+            03 03 00 00 02
+            00 00 00 00 00
+            00 00 00 00 00
+            00 00 00 00 00
+            00 00 00 00 00
+        ];
+        lut-default = [
+            00 00 00 00 00 00 00
+            80 00 00 00 00 00 00
+            40 00 00 00 00 00 00
+            80 00 00 00 00 00 00
+            00 00 00 00 00 00 00
+            0A 00 00 00 04
+            00 00 00 00 00
+            00 00 00 00 00
+            00 00 00 00 00
+            00 00 00 00 00
+            00 00 00 00 00
+            00 00 00 00 00
+            00 00 00 00 00
+        ];
     };
 };
 
 / {
     chosen {
-        zephyr,display = &oled;
+        zephyr,display = &ssd16xx;
         zmk,underglow = &led_strip;
         zmk,backlight = &backlight;
     };
